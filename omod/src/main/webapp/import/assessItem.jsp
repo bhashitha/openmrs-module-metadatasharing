@@ -268,7 +268,7 @@
 		</tr>
 	</table>
 
-	<openmrs:portlet url="comparisonView" id="comparisonView" moduleId="datacomparison" />
+	<openmrs:portlet url="comparisonView" id="comparisonView" moduleId="datacomparison" parameters="incoming=${item.importedItemId}|existing=${item.existing}|className=${item.classname}" />
 
 
 	<p>
