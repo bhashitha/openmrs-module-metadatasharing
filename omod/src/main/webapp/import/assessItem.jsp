@@ -267,14 +267,16 @@
 					collections and overwrite simple values</div></td>
 		</tr>
 	</table>
-
-	<openmrs:portlet url="comparisonView" id="comparisonView" moduleId="datacomparison" parameters="incoming=${item.importedItemId}|existing=${item.existing}|className=${item.classname}" />
-
-
+	
 	<p>
 		<input id="nextButton" type="submit"
 			value="<spring:message code="metadatasharing.next" />" /> <br />
 	</p>
+</springform:form>
+
+<springform:form commandName="item" action="http://localhost:8590/openmrs/module/datacomparison/datacomparisonmoduleLink.form" method="POST" id="hygyg">
+	<input type="hidden" name="className" value="${item.classname}" />
+	<input type="submit" value="Comparison View" />
 </springform:form>
 
 <div id="chooseExistingDialog">

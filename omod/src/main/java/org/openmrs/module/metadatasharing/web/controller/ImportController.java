@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -535,7 +536,7 @@ public class ImportController {
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.GET)
 	public void assessItem(@ModelAttribute(ITEMS)
-	List<ImportedItem> items, Integer index, Model model) {
+	List<ImportedItem> items, Integer index, Model model, HttpServletRequest request) {
 		ImportedItem importedItem = items.get(index);
 		importedItem.loadExisting();
 		
@@ -554,6 +555,8 @@ public class ImportController {
 				importedItem.setImportType(ImportType.OMIT);
 			}
 		}
+		importedItem.getClass().getClassLoader().toString();
+		request.getSession().setAttribute("item", importedItem);
 		
 		model.addAttribute("type", Handler.getRegisteredType(importedItem.getIncoming()));
 		model.addAttribute(ITEM, importedItem);
@@ -565,7 +568,7 @@ public class ImportController {
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.GET, params = "uuid")
 	public void assessItem(@ModelAttribute(ITEMS)
-	List<ImportedItem> items, Integer index, String uuid, Model model) {
+	List<ImportedItem> items, Integer index, String uuid, Model model, HttpServletRequest request) {
 		ImportedItem importedItem = items.get(index);
 		
 		if (importedItem.isExistingReplaceable()) {
@@ -576,7 +579,7 @@ public class ImportController {
 			}
 		}
 		
-		assessItem(items, index, model);
+		assessItem(items, index, model, request);
 	}
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.POST)
