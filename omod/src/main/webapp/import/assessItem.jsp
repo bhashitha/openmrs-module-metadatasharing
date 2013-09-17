@@ -239,6 +239,11 @@
 			</td>
 		</tr>
 		<tr>
+			<td>
+				<a id="comparisonViewLink" href="http://localhost:8590/openmrs/module/datacomparison/datacomparisonmoduleLink.form" >Comparison View</a>
+			</td>
+		</tr>
+		<tr>
 			<td><springform:radiobutton path="importType" value="CREATE"
 					id="createButton" disabled="${!empty incomingInvalid}" /> Create
 				New
@@ -272,11 +277,6 @@
 		<input id="nextButton" type="submit"
 			value="<spring:message code="metadatasharing.next" />" /> <br />
 	</p>
-</springform:form>
-
-<springform:form commandName="item" action="http://localhost:8590/openmrs/module/datacomparison/datacomparisonmoduleLink.form" method="POST" id="hygyg">
-	<input type="hidden" name="className" value="${item.classname}" />
-	<input type="submit" value="Comparison View" />
 </springform:form>
 
 <div id="chooseExistingDialog">
