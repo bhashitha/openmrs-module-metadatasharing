@@ -535,8 +535,7 @@ public class ImportController {
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.GET)
 	public void assessItem(@ModelAttribute(ITEMS)
-	List<ImportedItem> items, Integer index, Model model, @ModelAttribute(IMPORTER)
-	PackageImporter importer) {
+	List<ImportedItem> items, Integer index, Model model, HttpServletRequest request) {
 		ImportedItem importedItem = items.get(index);
 		importedItem.loadExisting();
 		
@@ -556,6 +555,9 @@ public class ImportController {
 			}
 		}
 		
+		request.getSession().setAttribute("existingItem", importedItem.getExisting());
+		request.getSession().setAttribute("incomingItem", importedItem.getIncoming());
+		
 		model.addAttribute("type", Handler.getRegisteredType(importedItem.getIncoming()));
 		model.addAttribute(ITEM, importedItem);
 		AssessItemForm assessItemForm = new AssessItemForm();
@@ -566,8 +568,7 @@ public class ImportController {
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.GET, params = "uuid")
 	public void assessItem(@ModelAttribute(ITEMS)
-	List<ImportedItem> items, @ModelAttribute(IMPORTER)
-	PackageImporter importer, Integer index, String uuid, Model model) {
+	List<ImportedItem> items, Integer index, String uuid, Model model, HttpServletRequest request) {
 		ImportedItem importedItem = items.get(index);
 		
 		if (importedItem.isExistingReplaceable()) {
@@ -578,7 +579,7 @@ public class ImportController {
 			}
 		}
 		
-		assessItem(items, index, model, importer);
+		assessItem(items, index, model, request);
 	}
 	
 	@RequestMapping(value = ITEM_PATH, method = RequestMethod.POST)
