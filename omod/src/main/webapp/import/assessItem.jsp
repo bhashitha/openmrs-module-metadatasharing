@@ -240,7 +240,7 @@
 		</tr>
 		<tr>
 			<td>
-				<a id="comparisonViewLink" href="http://localhost:8590/openmrs/module/datacomparison/datacomparisonmoduleLink.form?packageGroupUuid=${importer.importedPackage.groupUuid}" >Comparison View</a>
+				<a id="comparisonViewLink" href="http://localhost:8590/openmrs/module/datacomparison/datacomparisonmoduleLink.form" >Comparison View</a>
 			</td>
 		</tr>
 		<tr>

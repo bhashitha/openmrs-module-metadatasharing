@@ -32,6 +32,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.metadatasharing.ImportConfig;
 import org.openmrs.module.metadatasharing.ImportMode;
 import org.openmrs.module.metadatasharing.ImportType;
@@ -555,8 +556,12 @@ public class ImportController {
 			}
 		}
 		
+		Context.addProxyPrivilege("Manage Concepts");
+		Context.addProxyPrivilege("View Concepts");
 		request.getSession().setAttribute("existingItem", importedItem.getExisting());
 		request.getSession().setAttribute("incomingItem", importedItem.getIncoming());
+		Context.removeProxyPrivilege("Manage Concepts");
+		Context.removeProxyPrivilege("View Concepts");
 		
 		model.addAttribute("type", Handler.getRegisteredType(importedItem.getIncoming()));
 		model.addAttribute(ITEM, importedItem);
